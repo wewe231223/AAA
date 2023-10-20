@@ -10,7 +10,7 @@ private:
 public:
 	Shader(const char* VertexShaderPath,const char* FragmentShaderPath);
 
-
+	ShaderID GetShaderID() { return this->m_ShaderID; }
 
 
 

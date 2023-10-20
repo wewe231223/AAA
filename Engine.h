@@ -30,9 +30,11 @@ public:
 	static Engine* GetInstance(int* ,char**);
 	static Engine* GetInstance();
 
-
-
-
 	void Run();
+
+	ShaderID GetShader() { return this->m_Shader->GetShaderID(); }
+
+
+
 };
 
