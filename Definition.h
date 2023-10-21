@@ -41,3 +41,11 @@ typedef struct _TAG_COLOR3F{
 	float b;
 
 }Color3F;
+
+
+typedef struct _TAG_ROTATION {
+	float x;
+	float y;
+	float z;
+
+}Rotation;

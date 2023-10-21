@@ -57,6 +57,7 @@ Engine* Engine::GetInstance(int* argcp,char** argv)
 		EngineInstance->m_Timer = std::make_unique<Timer>();
 		EngineInstance->m_MeshManager = std::make_unique<MeshManager>();
 		EngineInstance->m_Renderer = std::make_unique<Renderer>();
+		EngineInstance->m_SceneManager = std::make_unique<SceneManager>();
 
 
 
@@ -67,10 +68,8 @@ Engine* Engine::GetInstance(int* argcp,char** argv)
 
 
 
-
-		
-
-
+		EngineInstance->m_MeshManager->NewMesh("sphere.obj","sphere");
+		EngineInstance->m_SceneManager->Read("Scene1.sc");
 
 
 	}
@@ -96,7 +95,7 @@ void Engine::update() {
 	std::string Fpsstr = base + std::to_string(this->m_Timer->GetFps());
 
 	glutSetWindowTitle(Fpsstr.c_str());
-	this->m_Renderer->update(this->m_Timer->GetDeltaTime() * 0.01f);
+	this->m_Renderer->update(this->m_Timer->GetDeltaTime());
 }
 
 void Engine::render(){

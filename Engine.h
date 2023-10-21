@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "MeshManager.h"
 #include "Renderer.h"
+#include "SceneManager.h"
 
 
 class Engine{
@@ -22,13 +23,15 @@ private:
 
 
 private:
-
-
 	std::unique_ptr<Shader> m_Shader{};
 	std::unique_ptr<Timer> m_Timer{};
 	std::unique_ptr<MeshManager> m_MeshManager{};
 	std::unique_ptr<Renderer> m_Renderer{};
+	std::unique_ptr<SceneManager> m_SceneManager{};
 
+private:
+
+	
 
 public:
 

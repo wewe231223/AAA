@@ -17,7 +17,7 @@ private:
 	GLfloat FovY = 60.f;
 
 	GLfloat NearZ = 0.1f;
-	GLfloat FarZ = 1000.f;
+	GLfloat FarZ = 2000.f;
 	GLfloat Aspect = DEFAULT_WINDOW_WIDTHF / DEFAULT_WINDOW_HEIGHTF;
 
 	glm::vec3 Basis_x = Axis::X;

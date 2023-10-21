@@ -34,13 +34,15 @@ Mesh::Mesh(std::string path){
 		this->File >> head;
 		if (head[0] == '#') {
 			getline(this->File, head);
+			continue;
 		}
 
 
 
 		if (head[0] == 'v' && head[1] == 't') {
 			glm::vec2 uv{};
-			this->File >> uv.x >> uv.y;
+			float dummy;
+			this->File >> uv.x >> uv.y >> dummy;
 			this->UV.push_back(uv);
 		}
 		else if (head[0] == 'v' && head[1] == 'n') {

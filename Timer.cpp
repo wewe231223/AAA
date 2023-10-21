@@ -23,7 +23,7 @@ bool Timer::Init()
 	}
 
 
-	this->m_ticksPerMs = static_cast<float>(this->m_frequency / 1000);
+	this->m_ticksPerMs = static_cast<float>(this->m_frequency);
 	QueryPerformanceCounter((LARGE_INTEGER*)&(this->m_startTime));
 
 	return true;
@@ -47,8 +47,9 @@ void Timer::Update(){
 
 	this->m_Frame += 1;
 	this->m_FpsTime += this->m_deltaTime;
+	std::cout << this->m_deltaTime << std::endl;
 
-	if (m_FpsTime >= 1000.f) {
+	if (m_FpsTime >= 1.f) {
 		this->m_Fps = this->m_Frame;
 		this->m_Frame = 0;
 		this->m_FpsTime = 0;
