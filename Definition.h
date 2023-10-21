@@ -15,7 +15,22 @@ constexpr auto DEFAULT_VERTEX_SHADER_PATH = "3D_Vertex_Shader.glsl";
 constexpr auto DEFAULT_FRAGMENT_SHADER_PATH = "3D_Fragment_Shader.glsl";
 
 
+
+
 typedef unsigned int VertexShaderID;
 typedef unsigned int FragmentShaderID;
 typedef unsigned int ShaderID;
 
+
+typedef unsigned int VertexArrayObject;
+typedef unsigned int VertexPositionBufferObject;
+typedef unsigned int VertexColorBufferObject;
+typedef unsigned int VertexElementObject;
+
+
+typedef struct _TAG_COLOR3F{
+	float r;
+	float g;
+	float b;
+
+}Color3F;

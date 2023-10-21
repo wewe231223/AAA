@@ -133,13 +133,21 @@
   <ItemGroup>
     <ClCompile Include="AAA.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshManager.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Definition.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="3D_Fragment_Shader.glsl" />

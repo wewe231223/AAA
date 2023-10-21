@@ -2,6 +2,8 @@
 #include "pch.h"
 #include "Definition.h"
 #include "Shader.h"
+#include "Timer.h"
+#include "MeshManager.h"
 
 class Engine{
 private:
@@ -21,8 +23,8 @@ private:
 
 
 	std::unique_ptr<Shader> m_Shader{};
-
-
+	std::unique_ptr<Timer> m_Timer{};
+	std::unique_ptr<MeshManager> m_MeshManager{};
 
 
 public:
@@ -31,8 +33,12 @@ public:
 	static Engine* GetInstance();
 
 	void Run();
+	void Update();
+
+	void VsyncUpdate(bool onoff);
 
 	ShaderID GetShader() { return this->m_Shader->GetShaderID(); }
+
 
 
 
