@@ -27,6 +27,13 @@ typedef unsigned int VertexPositionBufferObject;
 typedef unsigned int VertexColorBufferObject;
 typedef unsigned int VertexElementObject;
 
+namespace Axis {
+	constexpr glm::vec3 X = glm::vec3(1.f, 0.f, 0.f);
+	constexpr glm::vec3 Y = glm::vec3(0.f, 1.f, 0.f);
+	constexpr glm::vec3 Z = glm::vec3(0.f, 0.f, 1.f);
+
+}
+
 
 typedef struct _TAG_COLOR3F{
 	float r;

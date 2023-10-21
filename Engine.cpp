@@ -4,8 +4,11 @@ Engine* Engine::EngineInstance = nullptr;
 
 
 void __default__draw() {
-	glClearColor(0.0, 1.0, 1.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	Engine::GetInstance()->render();
+
 	glutSwapBuffers();
 }
 
@@ -18,7 +21,7 @@ void __default__reshape(int w,int h) {
 
 void __default__Idle() {
 	if (Engine::GetInstance() != nullptr) {
-		Engine::GetInstance()->Update();
+		Engine::GetInstance()->update();
 		glutPostRedisplay();
 	}
 }
@@ -53,7 +56,10 @@ Engine* Engine::GetInstance(int* argcp,char** argv)
 		EngineInstance->m_Shader = std::make_unique<Shader>(DEFAULT_VERTEX_SHADER_PATH, DEFAULT_FRAGMENT_SHADER_PATH);
 		EngineInstance->m_Timer = std::make_unique<Timer>();
 		EngineInstance->m_MeshManager = std::make_unique<MeshManager>();
-		
+		EngineInstance->m_Renderer = std::make_unique<Renderer>();
+
+
+
 		EngineInstance->m_Timer->Init();
 
 
@@ -62,7 +68,7 @@ Engine* Engine::GetInstance(int* argcp,char** argv)
 
 
 
-
+		
 
 
 
@@ -83,13 +89,18 @@ Engine* Engine::GetInstance(){
 
 const std::string base("Fps : ");
 
-void Engine::Update() {
+void Engine::update() {
 	
 	this->m_Timer->Update();
 
 	std::string Fpsstr = base + std::to_string(this->m_Timer->GetFps());
 
 	glutSetWindowTitle(Fpsstr.c_str());
+	this->m_Renderer->update(this->m_Timer->GetDeltaTime() * 0.01f);
+}
+
+void Engine::render(){
+	this->m_Renderer->render(this->GetShader());
 }
 
 void Engine::VsyncUpdate(bool onoff){
