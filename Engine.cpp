@@ -20,10 +20,10 @@ void __default__reshape(int w,int h) {
 
 
 void __default__Idle() {
-	if (Engine::GetInstance() != nullptr) {
-		Engine::GetInstance()->update();
-		glutPostRedisplay();
-	}
+
+	Engine::GetInstance()->update();
+	glutPostRedisplay();
+	
 }
 
 Engine* Engine::GetInstance(int* argcp,char** argv)
@@ -55,8 +55,7 @@ Engine* Engine::GetInstance(int* argcp,char** argv)
 
 		EngineInstance->m_Shader = std::make_unique<Shader>(DEFAULT_VERTEX_SHADER_PATH, DEFAULT_FRAGMENT_SHADER_PATH);
 		EngineInstance->m_Timer = std::make_unique<Timer>();
-		EngineInstance->m_MeshManager = std::make_unique<MeshManager>();
-		EngineInstance->m_Renderer = std::make_unique<Renderer>();
+		EngineInstance->m_Renderer = std::make_unique<Renderer>(EngineInstance->GetShader());
 		EngineInstance->m_SceneManager = std::make_unique<SceneManager>();
 
 
@@ -68,7 +67,6 @@ Engine* Engine::GetInstance(int* argcp,char** argv)
 
 
 
-		EngineInstance->m_MeshManager->NewMesh("sphere.obj","sphere");
 		EngineInstance->m_SceneManager->Read("Scene1.sc");
 
 
@@ -79,20 +77,18 @@ Engine* Engine::GetInstance(int* argcp,char** argv)
 }
 
 Engine* Engine::GetInstance(){
-	if (EngineInstance == nullptr) {
-		exit(EXIT_FAILURE);
-	}
+
 	return EngineInstance;
 }
 
 
 const std::string base("Fps : ");
-
+std::string Fpsstr{};
 void Engine::update() {
 	
 	this->m_Timer->Update();
-
-	std::string Fpsstr = base + std::to_string(this->m_Timer->GetFps());
+	Fpsstr.clear();
+	Fpsstr = base + std::to_string(this->m_Timer->GetFps());
 
 	glutSetWindowTitle(Fpsstr.c_str());
 	this->m_Renderer->update(this->m_Timer->GetDeltaTime());

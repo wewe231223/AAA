@@ -1,8 +1,10 @@
 #include "Renderer.h"
+#include "Model.h"
 
-Renderer::Renderer(){
 
-	this->m_Camera = std::make_unique<Camera>();
+Renderer::Renderer(ShaderID sid){
+
+	this->m_Camera = std::make_unique<Camera>(sid);
 	this->m_Coord = std::make_unique<Coord>();
 
 }
@@ -26,6 +28,10 @@ void Renderer::update(GLfloat dt){
 void Renderer::render(ShaderID sid){
 	this->m_Camera->Render(sid);
 	this->m_Coord->render(sid);
+
+	ModelList::GetInstance()->render(sid);
+
+
 }
 
 

@@ -3,7 +3,7 @@
 
 class Camera{
 public:
-	Camera();
+	Camera(ShaderID sid);
 	Camera(const Camera& other);
 
 	~Camera();
@@ -20,9 +20,14 @@ private:
 	GLfloat FarZ = 2000.f;
 	GLfloat Aspect = DEFAULT_WINDOW_WIDTHF / DEFAULT_WINDOW_HEIGHTF;
 
-	glm::vec3 Basis_x = Axis::X;
-	glm::vec3 Basis_y = Axis::Y;
-	glm::vec3 Basis_z = Axis::Z;
+	glm::vec3 Basis_x = glm::normalize(-this->AT);
+	glm::vec3 Basis_y = glm::normalize(glm::cross(this->UP, this->Basis_z));
+	glm::vec3 Basis_z = glm::normalize(glm::cross(this->Basis_z, this->Basis_x));
+
+	ShaderID m_ShaderID{};
+	
+	GLuint m_PerspectiveLocation{};
+	GLuint m_CameraLocation{};
 
 
 public:

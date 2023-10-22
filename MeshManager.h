@@ -14,12 +14,14 @@ public:
 private:
 
 	
-	stdext::hash_map<std::string, std::shared_ptr<Mesh> > MeshMap{};
+	std::map<std::string, std::shared_ptr<Mesh>> m_MeshMap;
+
 
 public:
 
 
 	void NewMesh(const char* MeshPath, const char* MeshName);
+	const std::shared_ptr<Mesh> GetMesh(std::string MeshName);
 
 
 };

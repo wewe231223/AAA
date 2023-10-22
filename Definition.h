@@ -49,3 +49,11 @@ typedef struct _TAG_ROTATION {
 	float z;
 
 }Rotation;
+namespace glm {
+	inline bool IsValue(glm::vec3 vec) {
+		if (vec.x != 0 || vec.y != 0 || vec.z != 0) {
+			return true;
+		}
+		return false;
+	}
+}

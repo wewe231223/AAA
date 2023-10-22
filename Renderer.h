@@ -7,7 +7,7 @@
 class Renderer{
 	
 public:
-	Renderer();
+	Renderer(ShaderID sid);
 	Renderer(const Renderer& other);
 	~Renderer();
 

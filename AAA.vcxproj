@@ -162,6 +162,15 @@
   <ItemGroup>
     <None Include="3D_Fragment_Shader.glsl" />
     <None Include="3D_Vertex_Shader.glsl" />
+    <None Include="Scene1.sc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="sphere.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="teapot.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

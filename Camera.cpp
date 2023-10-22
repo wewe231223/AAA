@@ -1,10 +1,13 @@
 #include "Camera.h"
-constexpr auto Coefficient_Camera_Rotate = 20.f;
-constexpr auto Coefficient_Camera_Movement = 20.f;
+constexpr auto Coefficient_Camera_Rotate = 80.f;
+constexpr auto Coefficient_Camera_Movement = 50.f;
 
 
-Camera::Camera()
-{
+Camera::Camera(ShaderID sid){
+
+	this->m_ShaderID = sid;
+	this->m_PerspectiveLocation = glGetUniformLocation(this->m_ShaderID, "perspective");
+	this->m_CameraLocation = glGetUniformLocation(this->m_ShaderID, "lookat");
 }
 
 Camera::Camera(const Camera& other)
@@ -74,33 +77,29 @@ void Camera::update(GLfloat dt){
 	this->EYE += -1.f * (Axis::Y * CamerMove.y);
 
 
-	glm::mat4 Mat_Camera_Rotate{1.f};
-
-	Mat_Camera_Rotate = glm::rotate(Mat_Camera_Rotate, glm::radians(RotateFactor.x), this->Basis_y);
-	Mat_Camera_Rotate = glm::rotate(Mat_Camera_Rotate, glm::radians(RotateFactor.y), this->Basis_x);
+	if (glm::IsValue(RotateFactor)) {
+		glm::mat4 Mat_Camera_Rotate{ 1.f };
 
 
-	this->AT = glm::normalize(glm::vec3(Mat_Camera_Rotate * glm::vec4(this->AT , 1.f)));
+		Mat_Camera_Rotate = glm::rotate(Mat_Camera_Rotate, glm::radians(RotateFactor.x), this->Basis_y);
+		Mat_Camera_Rotate = glm::rotate(Mat_Camera_Rotate, glm::radians(RotateFactor.y), this->Basis_x);
 
-	this->Basis_z = glm::normalize(-this->AT);
-	this->Basis_x = glm::normalize(glm::cross(this->UP, this->Basis_z));
-	this->Basis_y = glm::normalize(glm::cross(this->Basis_z, this->Basis_x));
+
+		this->AT = glm::normalize(glm::vec3(Mat_Camera_Rotate * glm::vec4(this->AT, 1.f)));
+
+		this->Basis_z = glm::normalize(-this->AT);
+		this->Basis_x = glm::normalize(glm::cross(this->UP, this->Basis_z));
+		this->Basis_y = glm::normalize(glm::cross(this->Basis_z, this->Basis_x));
+	}
 }
 
 void Camera::Render(ShaderID shaderid){
 
-	GLuint PerspectiveLocation = glGetUniformLocation(shaderid, "perspective");
-	GLuint CameraLocation = glGetUniformLocation(shaderid, "lookat");
 
 
 	this->Aspect = static_cast<float>(glutGet(GLUT_WINDOW_WIDTH)) / static_cast<float>(glutGet(GLUT_WINDOW_HEIGHT));
-
-	glm::mat4 Mat_perspective = glm::perspective(glm::radians(this->FovY), this->Aspect, this->NearZ, this->FarZ);
-	glm::mat4 Mat_Lookat = glm::lookAt(this->EYE, this->AT + this->EYE, this->UP);
-
-
-	glUniformMatrix4fv(PerspectiveLocation, 1, GL_FALSE, glm::value_ptr(Mat_perspective));
-	glUniformMatrix4fv(CameraLocation, 1, GL_FALSE, glm::value_ptr(Mat_Lookat));
+	glUniformMatrix4fv(this->m_PerspectiveLocation, 1, GL_FALSE, glm::value_ptr(glm::perspective(glm::radians(this->FovY), this->Aspect, this->NearZ, this->FarZ)));
+	glUniformMatrix4fv(this->m_CameraLocation, 1, GL_FALSE, glm::value_ptr(glm::lookAt(this->EYE, this->AT + this->EYE, this->UP)));
 }
 
 

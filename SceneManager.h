@@ -1,5 +1,8 @@
 #pragma once
 #include "pch.h"
+#include "MeshManager.h"
+#include "Model.h"
+
 class SceneManager{
 public:
 	SceneManager();
@@ -7,6 +10,10 @@ public:
 
 	~SceneManager();
 
+
+private:
+
+	std::unique_ptr<MeshManager> m_MeshManager;
 
 
 public:

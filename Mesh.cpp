@@ -137,7 +137,7 @@ Mesh::Mesh(std::string path){
 	}
 
 
-
+	this->m_VertexCount = static_cast<GLuint>(this->VertexIndices.size());
 
 
 

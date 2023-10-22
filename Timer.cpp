@@ -31,28 +31,29 @@ bool Timer::Init()
 
 void Timer::Update(){
 	
-	if (this->m_TimeScale == 0.f) { return;  }
+	
 	
 	INT64 currTime = 0;
-
-
-
 	QueryPerformanceCounter((LARGE_INTEGER*)&currTime);
 
-	float dt = static_cast<float>(currTime - this->m_startTime);
-	this->m_deltaTime = (dt / this->m_ticksPerMs) * this->m_TimeScale;
+
+
+	this->m_deltaTime = (static_cast<float>(currTime - this->m_startTime) / this->m_ticksPerMs);
 	this->m_startTime = currTime;
 	
 	
 
-	this->m_Frame += 1;
+	this->m_Frame++;
 	this->m_FpsTime += this->m_deltaTime;
-	std::cout << this->m_deltaTime << std::endl;
+
+	this->m_deltaTime *= this->m_TimeScale;
+
+	//std::cout << this->m_deltaTime << std::endl;
 
 	if (m_FpsTime >= 1.f) {
 		this->m_Fps = this->m_Frame;
 		this->m_Frame = 0;
-		this->m_FpsTime = 0;
+		this->m_FpsTime = 0.f;
 	}
 	
 

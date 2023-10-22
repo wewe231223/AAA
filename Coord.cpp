@@ -4,10 +4,11 @@
 Coord::Coord(){
 
 
-	Color3F Color1 = { Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,1.f),Random::Randfloat(0.f,1.f) };
-	Color3F Color2 = { Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,1.f),Random::Randfloat(0.f,1.f) };
-	Color3F Color3 = { Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,1.f),Random::Randfloat(0.f,1.f) };
-	Color3F Color4 = { Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,1.f),Random::Randfloat(0.f,1.f) };
+	Color3F Color1 = { Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,0.5f) };
+	Color3F Color2 = { Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,0.5f) };
+	Color3F Color3 = { Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,0.5f) };
+	Color3F Color4 = { Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,0.5f),Random::Randfloat(0.f,0.5f) };
+
 
 	const GLfloat Color[3 * 3 * 2] = {
 		Color1.r,Color1.g,Color1.b,
@@ -81,6 +82,10 @@ Coord::~Coord()
 }
 
 void Coord::render(ShaderID shaderid){
+
+
+	glDisable(GL_CULL_FACE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	GLuint TransitionLocation = glGetUniformLocation(shaderid, "transform");
 	glUniformMatrix4fv(TransitionLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
