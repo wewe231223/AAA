@@ -78,10 +78,10 @@ void Model::render(ShaderID sid){
 	this->m_Transition = glm::mat4{ 1.f };
 
 	this->m_Transition = glm::translate(this->m_Transition, this->m_Position);
-	this->m_Transition = glm::scale(this->m_Transition, glm::vec3(this->m_Scale, this->m_Scale, this->m_Scale));
 	this->m_Transition = glm::rotate(this->m_Transition, glm::radians(this->m_Rotation.x), glm::vec3(1.f, 0.f, 0.f));
 	this->m_Transition = glm::rotate(this->m_Transition, glm::radians(this->m_Rotation.y), glm::vec3(0.f, 1.f, 0.f));
 	this->m_Transition = glm::rotate(this->m_Transition, glm::radians(this->m_Rotation.z), glm::vec3(0.f, 0.f, 1.f));
+	this->m_Transition = glm::scale(this->m_Transition, glm::vec3(this->m_Scale, this->m_Scale, this->m_Scale));
 
 	if (this->m_Parent != nullptr) {
 		this->m_Transition = this->m_Parent->GetMat() * this->m_Transition;
