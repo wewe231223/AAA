@@ -17,5 +17,6 @@
 
 #define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 #include <hash_map>
+#include <Windows.h>
 
 #include "Definition.h"

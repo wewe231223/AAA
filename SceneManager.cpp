@@ -6,7 +6,6 @@ SceneManager::SceneManager(){
 
 	this->m_MeshManager = std::make_unique<MeshManager>();
 
-
 }
 
 SceneManager::SceneManager(const SceneManager& other)
@@ -17,9 +16,11 @@ SceneManager::~SceneManager()
 {
 }
 
+
 void SceneManager::Read(const char* path){
 	std::ifstream file(path);
 
+	std::shared_ptr<Model> parent = nullptr;
 	
 
 
@@ -37,8 +38,8 @@ void SceneManager::Read(const char* path){
 		file >> head;
 
 
-		// 파일의 안정성을 위해 파일의 끝을 X로 표시함 
-		if (head._Equal("X")) {
+		// 파일의 안정성을 위해 파일의 끝을 EndFile 로 표시함 
+		if (head._Equal("EndFile")) {
 			break;
 		}
 
@@ -88,46 +89,26 @@ void SceneManager::Read(const char* path){
 				ModelCull = false;
 			}
 			
+			if (parent != nullptr) {
+				ModelList::GetInstance()->NewModel(this->m_MeshManager->GetMesh(ModelName), ModelPos, ModelRot, ModelScale, ModelCull, ModelFill,parent);
+			}
+			else {
+				ModelList::GetInstance()->NewModel(this->m_MeshManager->GetMesh(ModelName), ModelPos, ModelRot, ModelScale, ModelCull, ModelFill);
+			}
+
+
 			
-			ModelList::GetInstance()->NewModel(this->m_MeshManager->GetMesh(ModelName),ModelPos,ModelRot,ModelScale,ModelCull,ModelFill);
+
+			
+
 		}
-		else if (head._Equal("Hierarchy")) {
-			std::string ModelName{};
-			glm::vec3 ModelPos{};
-			Rotation ModelRot{};
-
-			GLfloat ModelScale{};
-
-
-			GLboolean ModelFill{};
-			GLboolean ModelCull{};
-
-			char fb{};
-			char cb{};
-
-
-			file >> ModelName >> ModelPos.x >> ModelPos.y >> ModelPos.z >> ModelRot.x >> ModelRot.y >> ModelRot.z >> ModelScale >> fb >> cb;
-
-
-			if (fb == 't') {
-				ModelFill = true;
+		else if (head._Equal("{")) {
+			parent = ModelList::GetInstance()->GetLastModel();
+		}
+		else if (head._Equal("}")) {
+			if (parent != nullptr) {
+				parent = parent->GetParent();
 			}
-			else {
-				ModelFill = false;
-			}
-
-			if (cb == 't') {
-				ModelCull = true;
-			}
-			else {
-				ModelCull = false;
-			}
-
-
-			ModelList::GetInstance()->NewModel(this->m_MeshManager->GetMesh(ModelName), ModelPos, ModelRot, ModelScale, ModelCull, ModelFill, ModelList::GetInstance()->GetLastModel());
-				
-
-
 		}
 		else if (head._Equal("Coord")) {
 			char mode{};

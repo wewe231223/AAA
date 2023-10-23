@@ -40,6 +40,7 @@ public:
 
 	//getter
 	glm::mat4 GetMat() const { return this->m_Transition; }
+	const std::shared_ptr<Model> GetParent() const { return this->m_Parent; }
 };
 
 

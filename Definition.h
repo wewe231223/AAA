@@ -20,14 +20,17 @@ constexpr auto DEFAULT_FRAGMENT_SHADER_PATH = "3D_Fragment_Shader.glsl";
 typedef unsigned int VertexShaderID;
 typedef unsigned int FragmentShaderID;
 typedef unsigned int ShaderID;
-
-
 typedef unsigned int VertexArrayObject;
 typedef unsigned int VertexPositionBufferObject;
 typedef unsigned int VertexColorBufferObject;
 typedef unsigned int VertexElementObject;
 
+
+
+
 typedef float DeltaTime;
+
+
 
 namespace Axis {
 	constexpr glm::vec3 X = glm::vec3(1.f, 0.f, 0.f);

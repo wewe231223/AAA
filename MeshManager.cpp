@@ -18,14 +18,7 @@ MeshManager::~MeshManager(){
 }
 
 void MeshManager::NewMesh(const char* MeshPath, const char* MeshName){
-
 	this->m_MeshMap.insert(std::make_pair(std::string(MeshName), std::make_shared<Mesh>(std::string(MeshPath))));
-
-
-
-
-
-
 }
 
 const std::shared_ptr<Mesh> MeshManager::GetMesh(std::string MeshName)

@@ -1,10 +1,4 @@
 #include "Model.h"
-
-
-
-
-
-
 ModelList* ModelList::ModelListInstance = nullptr;
 
 ModelList* ModelList::GetInstance(){

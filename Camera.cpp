@@ -94,9 +94,6 @@ void Camera::update(DeltaTime dt){
 }
 
 void Camera::Render(ShaderID shaderid){
-
-
-
 	this->Aspect = static_cast<float>(glutGet(GLUT_WINDOW_WIDTH)) / static_cast<float>(glutGet(GLUT_WINDOW_HEIGHT));
 	glUniformMatrix4fv(this->m_PerspectiveLocation, 1, GL_FALSE, glm::value_ptr(glm::perspective(glm::radians(this->FovY), this->Aspect, this->NearZ, this->FarZ)));
 	glUniformMatrix4fv(this->m_CameraLocation, 1, GL_FALSE, glm::value_ptr(glm::lookAt(this->EYE, this->AT + this->EYE, this->UP)));
