@@ -103,8 +103,17 @@ void Coord::render(ShaderID shaderid){
 
 		break;
 	case RenderLineOnly:
+
+		glBindVertexArray(this->Line_Vao);
+		glDrawArrays(GL_LINES, 0, 18);
+
+
 		break;
 	case RenderXZOnly:
+
+		glBindVertexArray(this->XZ_Vao);
+		glDrawArrays(GL_TRIANGLES, 0, 18);
+
 		break;
 	default:
 		break;

@@ -17,12 +17,9 @@ Renderer::~Renderer()
 {
 }
 
-void Renderer::update(GLfloat dt){
+void Renderer::update(DeltaTime dt){
 	this->m_Camera->update(dt);
-
-
-
-
+	ModelList::GetInstance()->update(dt);
 }
 
 void Renderer::render(ShaderID sid){

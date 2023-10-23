@@ -18,7 +18,7 @@ Camera::~Camera()
 {
 }
 
-void Camera::update(GLfloat dt){
+void Camera::update(DeltaTime dt){
 
 	glm::vec3 CamerMove{0.f,0.f,0.f};
 

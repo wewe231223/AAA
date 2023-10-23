@@ -27,6 +27,8 @@ typedef unsigned int VertexPositionBufferObject;
 typedef unsigned int VertexColorBufferObject;
 typedef unsigned int VertexElementObject;
 
+typedef float DeltaTime;
+
 namespace Axis {
 	constexpr glm::vec3 X = glm::vec3(1.f, 0.f, 0.f);
 	constexpr glm::vec3 Y = glm::vec3(0.f, 1.f, 0.f);
@@ -49,6 +51,8 @@ typedef struct _TAG_ROTATION {
 	float z;
 
 }Rotation;
+
+
 namespace glm {
 	inline bool IsValue(glm::vec3 vec) {
 		if (vec.x != 0 || vec.y != 0 || vec.z != 0) {

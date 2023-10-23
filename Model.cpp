@@ -47,6 +47,15 @@ void ModelList::render(ShaderID sid){
 
 }
 
+void ModelList::update(DeltaTime dt){
+
+	for (auto& i : this->List) {
+		i->update(dt);
+	}
+
+
+}
+
 void Model::render(ShaderID sid){
 	m_Cull ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
 	m_Cull ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
@@ -80,4 +89,8 @@ void Model::render(ShaderID sid){
 
 
 
+}
+
+void Model::update(DeltaTime dt)
+{
 }

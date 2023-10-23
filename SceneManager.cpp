@@ -1,4 +1,6 @@
 #include "SceneManager.h"
+#include "Engine.h"
+
 
 SceneManager::SceneManager(){
 
@@ -36,16 +38,17 @@ void SceneManager::Read(const char* path){
 
 
 		// 파일의 안정성을 위해 파일의 끝을 X로 표시함 
-		if (head[0] == 'x') {
+		if (head._Equal("X")) {
 			break;
 		}
 
-		if (head[0] == '#') {
+
+		if (head._Equal("#")) {
 			std::getline(file, head);
 			continue;
 
-		}
-		else if (head[0] == 'r') {
+		} 
+		else if (head._Equal("Mesh")) {
 			std::string MeshPath{};
 			std::string MeshName{};
 			file >> MeshPath >> MeshName;
@@ -53,7 +56,7 @@ void SceneManager::Read(const char* path){
 
 		}
 	
-		else if (head[0] == '$') {
+		else if (head._Equal("Model")) {
 			std::string ModelName{};
 			glm::vec3 ModelPos{};
 			Rotation ModelRot{};
@@ -71,7 +74,6 @@ void SceneManager::Read(const char* path){
 			file >> ModelName >> ModelPos.x >> ModelPos.y >> ModelPos.z >> ModelRot.x >> ModelRot.y >> ModelRot.z >> ModelScale >> fb >> cb;
 			
 
-			std::cout << fb << " " << cb << std::endl;
 			if (fb == 't') {
 				ModelFill = true;
 			}
@@ -88,7 +90,26 @@ void SceneManager::Read(const char* path){
 			
 			
 			ModelList::GetInstance()->NewModel(this->m_MeshManager->GetMesh(ModelName),ModelPos,ModelRot,ModelScale,ModelCull,ModelFill);
-		} 
+		}
+		else if (head._Equal("Coord")) {
+			char mode{};
+
+			file >> mode;
+			
+			CoordRender_Flag m{};
+
+			if (mode == 'a') {
+				m = RenderAll;
+			}
+			else if (mode == 'l') {
+				m = RenderLineOnly;
+			}
+			else if (mode == 's') {
+				m = RenderXZOnly;
+			}
+
+			Engine::GetInstance()->SetCoordRenderMode(m);
+		}
 
 
 

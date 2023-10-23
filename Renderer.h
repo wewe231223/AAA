@@ -22,8 +22,12 @@ private:
 
 public:
 
-	void update(GLfloat dt);
+	void update(DeltaTime dt);
 	void render(ShaderID sid);
+
+public:
+
+	void SetCoordRenderMode(CoordRender_Flag f) { this->m_Coord->rendermode(f); };
 
 };
 

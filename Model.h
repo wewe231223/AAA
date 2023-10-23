@@ -26,6 +26,7 @@ public:
 		: m_Vao(Vao), m_VertexCount(VertexCount), m_Position(pos), m_Rotation(rot),m_Scale(Scale), m_Cull(cull), m_Fill(fill) {}
 
 	void render(ShaderID sid);
+	void update(DeltaTime dt);
 };
 
 
@@ -52,6 +53,7 @@ public:
 	void NewModel(const std::shared_ptr<Mesh> mesh, glm::vec3 pos, Rotation rot,GLfloat sc,GLboolean cull,GLboolean fill);
 	
 	void render(ShaderID sid);
+	void update(DeltaTime dt);
 
 
 };

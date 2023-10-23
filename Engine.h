@@ -43,8 +43,11 @@ public:
 
 	void VsyncUpdate(bool onoff);
 
-	const ShaderID GetShader() { return this->m_Shader->GetShaderID(); }
 
+	const ShaderID GetShader() { return this->m_Shader->GetShaderID(); }
+	
+
+	void SetCoordRenderMode(CoordRender_Flag f) { this->m_Renderer->SetCoordRenderMode(f); }
 
 
 

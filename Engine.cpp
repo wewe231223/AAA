@@ -89,8 +89,8 @@ void Engine::update() {
 	this->m_Timer->Update();
 	Fpsstr.clear();
 	Fpsstr = base + std::to_string(this->m_Timer->GetFps());
-
 	glutSetWindowTitle(Fpsstr.c_str());
+
 	this->m_Renderer->update(this->m_Timer->GetDeltaTime());
 }
 

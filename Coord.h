@@ -62,6 +62,7 @@ public:
 
 	void render(ShaderID shaderid);
 
+	void rendermode(CoordRender_Flag cf) { this->renderflag = cf; };
 
 };
 

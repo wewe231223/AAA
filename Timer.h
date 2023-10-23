@@ -11,7 +11,7 @@ public:
 	bool Init();
 	void Update();
 
-	float GetDeltaTime();
+	DeltaTime GetDeltaTime();
 	int GetFps();
 	
 	void SetTimeScale(float);
@@ -22,7 +22,7 @@ private:
 	INT64 m_startTime	= 0;
 
 	float m_ticksPerMs	= 0.f;
-	float m_deltaTime	= 0.f;
+	DeltaTime m_deltaTime	= 0.f;
 
 
 

@@ -32,7 +32,7 @@ private:
 
 public:
 
-	void update(GLfloat dt);
+	void update(DeltaTime dt);
 
 	void Render(ShaderID shaderid);
 
