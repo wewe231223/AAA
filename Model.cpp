@@ -38,6 +38,21 @@ void ModelList::NewModel(const std::shared_ptr<Mesh> mesh, glm::vec3 pos, Rotati
 	);
 }
 
+void ModelList::NewModel(const std::shared_ptr<Mesh> mesh, glm::vec3 pos, Rotation rot, GLfloat sc, GLboolean cull, GLboolean fill, const std::shared_ptr<Model> parent){
+	this->List.push_back(
+		std::make_shared<Model>(
+			mesh->GetVao(),
+			mesh->GetVertexCount(),
+			pos,
+			rot,
+			sc,
+			cull,
+			fill,
+			parent
+		)
+	);
+}
+
 void ModelList::render(ShaderID sid){
 
 	for (const auto& i : this->List) {
@@ -66,16 +81,20 @@ void Model::render(ShaderID sid){
 
 	GLuint TransitionLocation = glGetUniformLocation(sid, "transform");
 
-	glm::mat4 Transition{ 1.f };
+	this->m_Transition = glm::mat4{ 1.f };
+
+	this->m_Transition = glm::translate(this->m_Transition, this->m_Position);
+	this->m_Transition = glm::scale(this->m_Transition, glm::vec3(this->m_Scale, this->m_Scale, this->m_Scale));
+	this->m_Transition = glm::rotate(this->m_Transition, glm::radians(this->m_Rotation.x), glm::vec3(1.f, 0.f, 0.f));
+	this->m_Transition = glm::rotate(this->m_Transition, glm::radians(this->m_Rotation.y), glm::vec3(0.f, 1.f, 0.f));
+	this->m_Transition = glm::rotate(this->m_Transition, glm::radians(this->m_Rotation.z), glm::vec3(0.f, 0.f, 1.f));
+
+	if (this->m_Parent != nullptr) {
+		this->m_Transition = this->m_Parent->GetMat() * this->m_Transition;
+	}
 
 
-	Transition = glm::translate(Transition, this->m_Position);
-	Transition = glm::scale(Transition, glm::vec3(this->m_Scale, this->m_Scale, this->m_Scale));
-	Transition = glm::rotate(Transition, glm::radians(this->m_Rotation.x), glm::vec3(1.f, 0.f, 0.f));
-	Transition = glm::rotate(Transition, glm::radians(this->m_Rotation.y), glm::vec3(0.f, 1.f, 0.f));
-	Transition = glm::rotate(Transition, glm::radians(this->m_Rotation.z), glm::vec3(0.f, 0.f, 1.f));
-
-	glUniformMatrix4fv(TransitionLocation, 1, GL_FALSE, glm::value_ptr(Transition));
+	glUniformMatrix4fv(TransitionLocation, 1, GL_FALSE, glm::value_ptr(this->m_Transition));
 
 
 
@@ -94,3 +113,4 @@ void Model::render(ShaderID sid){
 void Model::update(DeltaTime dt)
 {
 }
+

@@ -91,6 +91,44 @@ void SceneManager::Read(const char* path){
 			
 			ModelList::GetInstance()->NewModel(this->m_MeshManager->GetMesh(ModelName),ModelPos,ModelRot,ModelScale,ModelCull,ModelFill);
 		}
+		else if (head._Equal("Hierarchy")) {
+			std::string ModelName{};
+			glm::vec3 ModelPos{};
+			Rotation ModelRot{};
+
+			GLfloat ModelScale{};
+
+
+			GLboolean ModelFill{};
+			GLboolean ModelCull{};
+
+			char fb{};
+			char cb{};
+
+
+			file >> ModelName >> ModelPos.x >> ModelPos.y >> ModelPos.z >> ModelRot.x >> ModelRot.y >> ModelRot.z >> ModelScale >> fb >> cb;
+
+
+			if (fb == 't') {
+				ModelFill = true;
+			}
+			else {
+				ModelFill = false;
+			}
+
+			if (cb == 't') {
+				ModelCull = true;
+			}
+			else {
+				ModelCull = false;
+			}
+
+
+			ModelList::GetInstance()->NewModel(this->m_MeshManager->GetMesh(ModelName), ModelPos, ModelRot, ModelScale, ModelCull, ModelFill, ModelList::GetInstance()->GetLastModel());
+				
+
+
+		}
 		else if (head._Equal("Coord")) {
 			char mode{};
 
