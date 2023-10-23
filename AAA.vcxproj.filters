@@ -75,6 +75,9 @@
     <ClCompile Include="Model.cpp">
       <Filter>소스 파일\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>소스 파일\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>헤더 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>헤더 파일\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

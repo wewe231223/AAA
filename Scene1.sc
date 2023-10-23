@@ -9,7 +9,7 @@ Mesh teapot.obj teapot
 Model	sphere 10	100	10	0 0 0 1		t t
 {
 	Model	sphere 10	0	10	0 0 0 2		t t
-
+	Animation= 
 	{
 		Model	sphere 20	0	0	0 0 0 1		t t
 		Model	sphere 40	0	0	0 0 0 1		t t

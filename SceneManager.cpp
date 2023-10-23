@@ -110,6 +110,12 @@ void SceneManager::Read(const char* path){
 				parent = parent->GetParent();
 			}
 		}
+		else if (head._Equal("Animation=")) {
+
+			std::cout << "Animation!" << std::endl;
+
+
+		}
 		else if (head._Equal("Coord")) {
 			char mode{};
 
