@@ -26,6 +26,7 @@ typedef unsigned int VertexColorBufferObject;
 typedef unsigned int VertexElementObject;
 
 
+typedef int BINARY;
 
 
 typedef float DeltaTime;
