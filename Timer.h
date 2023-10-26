@@ -12,6 +12,7 @@ public:
 	void Update();
 
 	DeltaTime GetDeltaTime();
+	DeltaTime GetAnimationDeltatime();
 	int GetFps();
 	
 	void SetTimeScale(float);
@@ -23,6 +24,7 @@ private:
 
 	float m_ticksPerMs	= 0.f;
 	DeltaTime m_deltaTime	= 0.f;
+	DeltaTime m_AnimationDeltaTime = 0.f;
 
 
 

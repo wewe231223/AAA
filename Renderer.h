@@ -22,7 +22,7 @@ private:
 
 public:
 
-	void update(DeltaTime dt);
+	void update(DeltaTime dt,DeltaTime Anidt);
 	void render(ShaderID sid);
 
 public:

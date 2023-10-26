@@ -110,9 +110,59 @@ void SceneManager::Read(const char* path){
 				parent = parent->GetParent();
 			}
 		}
-		else if (head._Equal("Animation=")) {
+		else if (head._Equal("<Animation>")) {
+			std::string AnimHead{};
 
-			std::cout << "Animation!" << std::endl;
+			file >> AnimHead;
+
+
+			if (AnimHead._Equal("Revolution")) {
+
+				GLfloat rad{};
+				glm::vec3 Axis{ 0.f };
+
+
+				file >> rad >> Axis.x >> Axis.y >> Axis.z;
+				
+				
+
+				
+				
+				ModelList::GetInstance()->GetLastModel()->SetAnim(rad,Axis);
+
+
+
+
+			}
+
+
+
+
+
+		}
+		else if (head._Equal("<Component>")) {
+			std::string FbHead{};
+
+			file >> FbHead;
+
+			if (FbHead._Equal("Circle")) {
+
+				glm::vec3 relpos{ 0.f };
+				glm::vec3 rot{ 0.f,1.f,0.f };
+				GLfloat rad = 1.f;
+				GLfloat angle = 0.f;
+
+				file >> relpos.x >> relpos.y >> relpos.z >> rad >> rot.x >> rot.y >> rot.z >> angle;
+
+
+				ModelList::GetInstance()->GetLastModel()->SetComponent(
+					std::make_shared<Circle>(ModelList::GetInstance()->GetLastModel(), relpos, rad, rot, angle)
+				);
+
+
+			}
+
+
 
 
 		}

@@ -22,16 +22,18 @@ private:
 
 	GLuint m_VertexCount{};
 
+	
 
 	VertexArrayObject m_VAO{};
 	VertexPositionBufferObject m_VPBO{};
 	VertexColorBufferObject m_VCBO{};
 	VertexElementObject m_EBO{};
 
-public:
 
+public:
 	VertexArrayObject GetVao() { return this->m_VAO; };
 	GLuint GetVertexCount() { return this->m_VertexCount; };
 
 
 };
+

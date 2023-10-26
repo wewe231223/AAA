@@ -77,27 +77,33 @@ Mesh::Mesh(std::string path){
 				int dataindex = 0;
 				if (Line[i].find("//") != std::string::npos) {
 					// 있으면
+
 					std::getline(iss, token, '/');
+					if(!token.empty())
 					this->VertexIndices.push_back(static_cast<GLuint>(stoi(token) - 1));
 
 
 					std::getline(iss, token, '/');
 					std::getline(iss, token, '/');
 
-
+					if (!token.empty())
 					this->NormalIndices.push_back(static_cast<GLuint>(stoi(token) - 1));
 				}
 				else {
 					//없으면 
+
 					std::getline(iss, token, '/');
+					if (!token.empty())
 					this->VertexIndices.push_back(static_cast<GLuint>(stoi(token) - 1));
 
 
 					std::getline(iss, token, '/');
+					if (!token.empty())
 					this->UvIndices.push_back(static_cast<GLuint>(stoi(token) - 1));
 
 
 					std::getline(iss, token, '/');
+					if (!token.empty())
 					this->NormalIndices.push_back(static_cast<GLuint>(stoi(token) - 1));
 
 

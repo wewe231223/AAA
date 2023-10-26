@@ -30,8 +30,15 @@ bool Timer::Init()
 }
 
 void Timer::Update(){
-	
-	
+	if (GetAsyncKeyState(VK_SPACE) & 0x08000) {
+		this->m_TimeScale = 0.f;
+	}
+
+	if (!(GetAsyncKeyState(VK_SPACE) & 0x08000)) {
+		this->m_TimeScale = 1.f;
+	}
+
+
 	
 	INT64 currTime = 0;
 	QueryPerformanceCounter((LARGE_INTEGER*)&currTime);
@@ -46,7 +53,8 @@ void Timer::Update(){
 	this->m_Frame++;
 	this->m_FpsTime += this->m_deltaTime;
 
-	this->m_deltaTime *= this->m_TimeScale;
+
+	this->m_AnimationDeltaTime = this->m_deltaTime * this->m_TimeScale;
 
 	//std::cout << this->m_deltaTime << std::endl;
 
@@ -63,6 +71,11 @@ void Timer::Update(){
 float Timer::GetDeltaTime()
 {
 	return this->m_deltaTime;
+}
+
+DeltaTime Timer::GetAnimationDeltatime()
+{
+	return this->m_AnimationDeltaTime;
 }
 
 int Timer::GetFps() {
