@@ -8,32 +8,36 @@ Mesh teapot.obj teapot
 
 
 
-Model sphere 0 0 0 0 0 0 10 t t
-<Component> Circle 0 1.2 0 4.24 0 1 0 0
+Model sphere 0 0 0 0 0 0 1 t t
+<Component> Circle 0 0 0 70.71 0 1 0 0
+<Component> Circle 0 0 0 70.71 1 0 1 90
+<Component> Circle 0 0 0 70.71 -1 0 1 90
 {
 
-Model sphere 3 0 -3 0 0 0 0.3 t t
-<Component> Circle 0 0 0 5 1 0 1 0
+Model sphere 50 0 -50 0 0 0 0.3 t t
+<Component> Circle 0 0 0 40 0 1 0 0
 <Animation> Revolution 5 1 0 1
 
 {
-	Model sphere 5 0 0 0 0 0 0.5 t t 
+	Model sphere 40 0 0 0 0 0 0.5 t t
 	<Animation> Revolution 5 0 1 0
 }
 
 
-Model sphere -3 0 -3 0 0 0 0.3 t t
+Model sphere -50 0 -50 0 0 0 0.3 t t
+<Component> Circle 0 0 0 40 0 1 0 0
 <Animation> Revolution 5 1 0 -1
 {
-	Model sphere 5 0 0 0 0 0 0.5 t t 
+	Model sphere 40 0 0 0 0 0 0.5 t t 
 	<Animation> Revolution 5 0 1 0
 }
 
 
-Model sphere 3 1 3 0 0 0 0.3 t t
+Model sphere 50 0 50 0 0 0 0.3 t t
+<Component> Circle 0 0 0 40 0 1 0 0
 <Animation> Revolution 5 0 1 0
 {
-	Model sphere 5 0 0 0 0 0 0.5 t t 
+	Model sphere 40 0 0 0 0 0 0.5 t t 
 	<Animation> Revolution 5 0 1 0
 }
 

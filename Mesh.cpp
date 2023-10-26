@@ -32,6 +32,8 @@ Mesh::Mesh(std::string path){
 
 	while (!this->File.eof()) {
 		this->File >> head;
+
+		//std::cout << "Head : " << head << std::endl;
 		if (head[0] == '#') {
 			getline(this->File, head);
 			continue;
@@ -41,8 +43,7 @@ Mesh::Mesh(std::string path){
 
 		if (head[0] == 'v' && head[1] == 't') {
 			glm::vec2 uv{};
-			float dummy;
-			this->File >> uv.x >> uv.y >> dummy;
+			this->File >> uv.x >> uv.y;
 			this->UV.push_back(uv);
 		}
 		else if (head[0] == 'v' && head[1] == 'n') {

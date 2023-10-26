@@ -78,6 +78,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>소스 파일\Render</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>헤더 파일\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
