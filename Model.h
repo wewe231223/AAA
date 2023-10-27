@@ -37,7 +37,8 @@ private:
 	glm::mat4 m_Transition{ 1.f };
 
 
-	
+	glm::vec3 m_DeltaPosition{ 0.f };
+	Rotation m_DeltaRotation{ 0.f };
 
 
 	std::vector<std::shared_ptr<Component>> m_ComponentList{};
@@ -66,6 +67,7 @@ public:
 
 	void SetAnim(GLfloat radius,glm::vec3 axis);
 	void SetComponent(std::shared_ptr<Component> c);
+	void SetInput(glm::vec3 m, Rotation r);
 };
 
 

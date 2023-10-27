@@ -9,9 +9,11 @@ Mesh teapot.obj teapot
 
 
 Model sphere 0 0 0 0 0 0 1 t t
+
 <Component> Circle 0 0 0 70.71 0 1 0 0
 <Component> Circle 0 0 0 70.71 1 0 1 90
 <Component> Circle 0 0 0 70.71 -1 0 1 90
+<Input> 50 0 50 100 0 100
 {
 
 Model sphere 50 0 -50 0 0 0 0.3 t t

@@ -21,56 +21,67 @@ Camera::~Camera()
 void Camera::update(DeltaTime dt){
 
 	glm::vec3 CamerMove{0.f,0.f,0.f};
-
-
-	if (GetAsyncKeyState('A') & 0x08000) {
-		CamerMove.x += dt * Coefficient_Camera_Movement;
-	}
-
-	if (GetAsyncKeyState('D') & 0x08000) {
-		CamerMove.x -= dt * Coefficient_Camera_Movement;
-	}
-
-
-	if (GetAsyncKeyState('W') & 0x08000) {
-		CamerMove.z += dt * Coefficient_Camera_Movement;
-	}
-
-	if (GetAsyncKeyState('S') & 0x08000) {
-		CamerMove.z -= dt * Coefficient_Camera_Movement;
-	}
-
-
-	if (GetAsyncKeyState('E') & 0x08000) {
-		CamerMove.y += dt * Coefficient_Camera_Movement;
-	}
-
-	if (GetAsyncKeyState('Q') & 0x08000) {
-		CamerMove.y -= dt * Coefficient_Camera_Movement;
-	}
-
 	glm::vec3 RotateFactor = glm::vec3{};
 
 
-	if (GetAsyncKeyState(VK_LEFT)) {
-		RotateFactor.x += dt * Coefficient_Camera_Rotate;
+	if (!(GetAsyncKeyState(VK_SHIFT) & 0x08000)) {
+		if (GetAsyncKeyState('A') & 0x08000) {
+			CamerMove.x += dt * Coefficient_Camera_Movement;
+		}
+
+		if (GetAsyncKeyState('D') & 0x08000) {
+			CamerMove.x -= dt * Coefficient_Camera_Movement;
+		}
+
+
+		if (GetAsyncKeyState('W') & 0x08000) {
+			CamerMove.z += dt * Coefficient_Camera_Movement;
+		}
+
+		if (GetAsyncKeyState('S') & 0x08000) {
+			CamerMove.z -= dt * Coefficient_Camera_Movement;
+		}
+
+
+		if (GetAsyncKeyState('E') & 0x08000) {
+			CamerMove.y += dt * Coefficient_Camera_Movement;
+		}
+
+		if (GetAsyncKeyState('Q') & 0x08000) {
+			CamerMove.y -= dt * Coefficient_Camera_Movement;
+		}
+
+
+
+		if (GetAsyncKeyState(VK_LEFT)) {
+			RotateFactor.x += dt * Coefficient_Camera_Rotate;
+		}
+
+
+		if (GetAsyncKeyState(VK_RIGHT)) {
+			RotateFactor.x -= dt * Coefficient_Camera_Rotate;
+		}
+
+
+		if (GetAsyncKeyState(VK_DOWN)) {
+			RotateFactor.y -= dt * Coefficient_Camera_Rotate;
+		}
+
+
+		if (GetAsyncKeyState(VK_UP)) {
+			RotateFactor.y += dt * Coefficient_Camera_Rotate;
+		}
+
+
+		if (GetAsyncKeyState('O') & 0x08000) {
+			this->m_CameraPerspectiveMode = false;
+		}
+
+		if (GetAsyncKeyState('P') & 0x08000) {
+			this->m_CameraPerspectiveMode = true;
+		}
+
 	}
-
-	
-	if (GetAsyncKeyState(VK_RIGHT)) {
-		RotateFactor.x -= dt * Coefficient_Camera_Rotate;
-	}
-
-
-	if (GetAsyncKeyState(VK_DOWN)) {
-		RotateFactor.y -= dt * Coefficient_Camera_Rotate;
-	}
-
-
-	if (GetAsyncKeyState(VK_UP)) {
-		RotateFactor.y += dt * Coefficient_Camera_Rotate;
-	}
-
 
 	this->EYE += -1.f * (this->Basis_x * CamerMove.x);
 	this->EYE += -1.f * (this->Basis_z * CamerMove.z);
@@ -95,7 +106,13 @@ void Camera::update(DeltaTime dt){
 
 void Camera::Render(ShaderID shaderid){
 	this->Aspect = static_cast<float>(glutGet(GLUT_WINDOW_WIDTH)) / static_cast<float>(glutGet(GLUT_WINDOW_HEIGHT));
-	glUniformMatrix4fv(this->m_PerspectiveLocation, 1, GL_FALSE, glm::value_ptr(glm::perspective(glm::radians(this->FovY), this->Aspect, this->NearZ, this->FarZ)));
+	if (this->m_CameraPerspectiveMode) {
+		glUniformMatrix4fv(this->m_PerspectiveLocation, 1, GL_FALSE, glm::value_ptr(glm::perspective(glm::radians(this->FovY), this->Aspect, this->NearZ, this->FarZ)));
+	}
+	else {
+		glUniformMatrix4fv(this->m_PerspectiveLocation, 1, GL_FALSE, glm::value_ptr(glm::ortho(-800.f,800.f,-600.f,600.f,0.1f,1000.f)));
+
+	}
 	glUniformMatrix4fv(this->m_CameraLocation, 1, GL_FALSE, glm::value_ptr(glm::lookAt(this->EYE, this->AT + this->EYE, this->UP)));
 }
 

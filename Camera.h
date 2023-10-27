@@ -30,6 +30,7 @@ private:
 	GLuint m_CameraLocation{};
 
 
+	GLboolean m_CameraPerspectiveMode = true;
 public:
 
 	void update(DeltaTime dt);

@@ -25,8 +25,6 @@ void Animation::update(DeltaTime dt,glm::vec3& pos){
 		pos = glm::rotate(glm::mat4{ 1.f }, glm::radians(dt * 100.f), this->m_Axis) * glm::vec4(pos,1.f);
 
 		
-
-		
 	}
 
 

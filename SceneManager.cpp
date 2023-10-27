@@ -117,25 +117,27 @@ void SceneManager::Read(const char* path){
 
 
 			if (AnimHead._Equal("Revolution")) {
-
 				GLfloat rad{};
 				glm::vec3 Axis{ 0.f };
-
-
 				file >> rad >> Axis.x >> Axis.y >> Axis.z;
-				
-				
-
-				
-				
 				ModelList::GetInstance()->GetLastModel()->SetAnim(rad,Axis);
-
-
-
-
 			}
 
 
+
+
+
+		}
+		else if (head._Equal("<Input>")) {
+
+			glm::vec3 mov{ 0.f };
+			Rotation rot{ 0.f };
+
+
+
+			file >> mov.x >> mov.y >> mov.z >> rot.x >> rot.y >> rot.z;
+
+			ModelList::GetInstance()->GetLastModel()->SetInput(mov, rot);
 
 
 

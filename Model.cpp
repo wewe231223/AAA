@@ -117,6 +117,52 @@ void Model::update(DeltaTime dt){
 		m_Animation->update(dt,this->m_Position);
 	}
 
+
+	if (GetAsyncKeyState(VK_SHIFT) & 0x08000) {
+
+		if (GetAsyncKeyState(VK_RIGHT) & 0x08000) {
+			this->m_Rotation.x += this->m_DeltaRotation.x * dt;
+		}
+		if (GetAsyncKeyState(VK_LEFT) & 0x08000) {
+			this->m_Rotation.x -= this->m_DeltaRotation.x * dt;
+		}
+
+		if (GetAsyncKeyState(VK_UP) & 0x08000) {
+			this->m_Rotation.z += this->m_DeltaRotation.z * dt;
+		}
+		if (GetAsyncKeyState(VK_DOWN) & 0x08000) {
+			this->m_Rotation.z -= this->m_DeltaRotation.z * dt;
+		}
+
+
+		if (GetAsyncKeyState('A') & 0x08000) {
+
+			this->m_Position.x -= this->m_DeltaPosition.x * dt;
+
+		}
+
+		if (GetAsyncKeyState('D') & 0x08000) {
+			this->m_Position.x += this->m_DeltaPosition.x * dt;
+
+		}
+
+
+		if (GetAsyncKeyState('S') & 0x08000) {
+			this->m_Position.z += this->m_DeltaPosition.z * dt;
+		}
+
+
+		if (GetAsyncKeyState('W') & 0x08000) {
+			this->m_Position.z -= this->m_DeltaPosition.z * dt;
+		}
+
+
+
+	}
+	
+
+
+
 }
 
 void Model::SetAnim(GLfloat radius,glm::vec3 axis){
@@ -125,6 +171,11 @@ void Model::SetAnim(GLfloat radius,glm::vec3 axis){
 
 void Model::SetComponent(std::shared_ptr<Component> c){
 	this->m_ComponentList.push_back(c);
+}
+
+void Model::SetInput(glm::vec3 m, Rotation r){
+	this->m_DeltaPosition = m;
+	this->m_DeltaRotation = r;
 }
 
 
